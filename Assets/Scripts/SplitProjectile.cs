@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class SplitProjectile : ProjectileBehaviour {
-   public  Rigidbody2D projectileBody;
+public class SplitProjectile : ProjectileBehaviour 
+{
+
+    public  Rigidbody2D projectileBody;
     public int splitProjectileLimit;
     Resource splitProjectilePool;
     List<Vector3> directionsList;
@@ -34,9 +36,6 @@ public class SplitProjectile : ProjectileBehaviour {
         directionsList.Add(new Vector3(Mathf.Cos(292.5f * Mathf.Deg2Rad), Mathf.Sin(292.5f * Mathf.Deg2Rad), 0));
         directionsList.Add(new Vector3(Mathf.Cos(315 * Mathf.Deg2Rad), Mathf.Sin(315 * Mathf.Deg2Rad), 0));
         directionsList.Add(new Vector3(Mathf.Cos(337.5f * Mathf.Deg2Rad), Mathf.Sin(337.5f * Mathf.Deg2Rad), 0));
-
-
-
 
 
         splitProjectilePool = new Resource(projectileBody, splitProjectileLimit, transform.position);
