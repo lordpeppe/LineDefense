@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         Rigidbody2D realEnemy = enemyPool.getNext();
         realEnemy.transform.position = transform.position;
         realEnemy.gameObject.SetActive(true);
-        realEnemy.GetComponent<Enemy>().resetHealth();
+        realEnemy.GetComponent<Enemy>().ResetHealth();
         
 
     }

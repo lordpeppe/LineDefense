@@ -3,46 +3,48 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
-    public float initHealth;
+	protected string enemyTag;
+
+	[SerializeField]
+    protected float speed;
+    [SerializeField]
+	private float initHealth;
+	[SerializeField]
+	private float damage;
+
     private float currentHealth;
-    public float damage;
+    
 
-
-    // Use this for initialization
     void Start()
     {
         currentHealth = initHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!isDestroyed())
+        if (!IsDestroyed())
         {
-            move(-5.74f , -1.08f);
+            //Move(-5.74f , -1.08f);
         }
         else
         {
             gameObject.SetActive(false);
         }
-
     }
 
-    void move(float HQX, float HQY)
+    protected void Move(float HQX, float HQY)
     {
-        
         Vector3 temp = new Vector3(HQX - transform.position.x, HQY - transform.position.y, 0);
         temp *= (speed / temp.magnitude) ;
         transform.position += temp;
     }
 
-    public void takeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
     }
 
-    bool isDestroyed()
+    bool IsDestroyed()
     {
         if (currentHealth <= 0)
         {
@@ -51,7 +53,7 @@ public class Enemy : MonoBehaviour
         else return false;
     }
 
-    public void resetHealth()
+    public void ResetHealth()
     {
         currentHealth = initHealth;
     }
@@ -61,7 +63,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "HQ")
         {
-            other.gameObject.GetComponent<HQ>().takeDamage(damage);
+            other.gameObject.GetComponent<HQ>().TakeDamage(damage);
             gameObject.SetActive(false);
 
         }
