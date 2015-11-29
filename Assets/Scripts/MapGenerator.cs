@@ -15,17 +15,22 @@ public class MapGenerator : MonoBehaviour {
     GameObject curPosPrefab;
 
     [SerializeField]
-    int objectiveAmount;
+    Material lineMat;
     
-	void Start () {
+
+    int objectiveAmount;
+    void Start()
+    {
         objectives = new List<Objective>();
         if(!LoadMapFile("Assets/Resources/testmap.mp"))
         {
             Debug.Log("Text file could not be loaded");
         }
+        
 	}
-	
-	void Update () {
+    
+
+    void Update () {
 	    
         if(Input.GetMouseButtonDown(0))
         {
@@ -93,5 +98,6 @@ public class MapGenerator : MonoBehaviour {
             return false;
         }
     }
+    
 
 }
