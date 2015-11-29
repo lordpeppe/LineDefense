@@ -21,8 +21,7 @@ public class projectile_Behaviour : MonoBehaviour {
         if(other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().takeDamage(damage);
-            gameObject.SetActive(false);
-            
+            gameObject.SetActive(false);            
         }
     }
 
