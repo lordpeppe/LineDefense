@@ -3,14 +3,17 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+	protected string enemyTag;
+
 	[SerializeField]
-    private float speed;
+    protected float speed;
     [SerializeField]
 	private float initHealth;
-    [SerializeField]
-	private float currentHealth;
-    [SerializeField]
+	[SerializeField]
 	private float damage;
+
+    private float currentHealth;
+    
 
     void Start()
     {
@@ -21,7 +24,7 @@ public class Enemy : MonoBehaviour
     {
         if (!IsDestroyed())
         {
-            Move(-5.74f , -1.08f);
+            //Move(-5.74f , -1.08f);
         }
         else
         {
@@ -29,11 +32,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Move(float HQX, float HQY)
+    protected void Move(float HQX, float HQY)
     {
-        
         Vector3 temp = new Vector3(HQX - transform.position.x, HQY - transform.position.y, 0);
-        temp *= (speed / temp.magnitude);
+        temp *= (speed / temp.magnitude) ;
         transform.position += temp;
     }
 
@@ -61,7 +63,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "HQ")
         {
-            other.gameObject.GetComponent<HQ>().takeDamage(damage);
+            other.gameObject.GetComponent<HQ>().TakeDamage(damage);
             gameObject.SetActive(false);
 
         }
