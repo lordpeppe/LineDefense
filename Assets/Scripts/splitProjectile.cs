@@ -11,22 +11,41 @@ public class splitProjectile : projectile_Behaviour {
     Vector3 destination;
     public float explosionSpeed;
     public Rigidbody2D powerUp;
+    
 
 	// Use this for initialization
 	void Start () {
 
         explosionSpeed = Mathf.Max(explosionSpeed, 1);
         directionsList = new List<Vector3>();
-        directionsList.Add(new Vector3(1 * explosionSpeed, 0, 0));
-        directionsList.Add(new Vector3(0, 1 * explosionSpeed, 0));
-        directionsList.Add(new Vector3(0, -1 * explosionSpeed, 0));
-        directionsList.Add(new Vector3(-1 * explosionSpeed, 0, 0));
+        directionsList.Add(new Vector3(Mathf.Cos(0), Mathf.Sin(0), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(22.5f * Mathf.Deg2Rad), Mathf.Sin(22.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(45 * Mathf.Deg2Rad), Mathf.Sin(45 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(67.5f * Mathf.Deg2Rad), Mathf.Sin(67.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(90 * Mathf.Deg2Rad), Mathf.Sin(90 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(112.5f * Mathf.Deg2Rad), Mathf.Sin(112.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(135 * Mathf.Deg2Rad), Mathf.Sin(135 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(157.5f * Mathf.Deg2Rad), Mathf.Sin(157.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(180 * Mathf.Deg2Rad), Mathf.Sin(180 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(202.5f * Mathf.Deg2Rad), Mathf.Sin(202.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(225 * Mathf.Deg2Rad), Mathf.Sin(225 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(257.5f * Mathf.Deg2Rad), Mathf.Sin(257.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(270 * Mathf.Deg2Rad), Mathf.Sin(270 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(292.5f * Mathf.Deg2Rad), Mathf.Sin(292.5f * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(315 * Mathf.Deg2Rad), Mathf.Sin(315 * Mathf.Deg2Rad), 0));
+        directionsList.Add(new Vector3(Mathf.Cos(337.5f * Mathf.Deg2Rad), Mathf.Sin(337.5f * Mathf.Deg2Rad), 0));
+
+
+
+
+
         splitProjectilePool = new Resource(projectileBody, splitProjectileLimit, transform.position);
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         float distance = Vector3.Distance(destination, transform.position);
 	    if(distance < 0.5f)
         {
@@ -44,7 +63,8 @@ public class splitProjectile : projectile_Behaviour {
             Rigidbody2D temp = splitProjectilePool.getNext();
             temp.gameObject.transform.position = transform.position;
             temp.gameObject.SetActive(true);
-            temp.velocity = directionsList[i];
+            temp.velocity = directionsList[i] * explosionSpeed;
+            temp.GetComponent<projectile_Behaviour>().Despawner();
             
         }
         gameObject.SetActive(false);
@@ -56,4 +76,6 @@ public class splitProjectile : projectile_Behaviour {
     {
         this.destination = destination;
     }
+
+  
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 public class Resource { 
+
     List<Rigidbody2D> resourcePool;
     int resourceIndex;
     int amount;

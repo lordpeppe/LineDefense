@@ -3,10 +3,11 @@ using System.Collections;
 
 public class projectile_Behaviour : MonoBehaviour {
     public float damage;
+    public float despawnTime;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -20,8 +21,18 @@ public class projectile_Behaviour : MonoBehaviour {
         if(other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().takeDamage(damage);
-            gameObject.SetActive(false);
-            
+            gameObject.SetActive(false);            
         }
+    }
+
+    public void Despawner()
+    {
+        StartCoroutine(Despawn());
+    }
+
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(despawnTime);
+        gameObject.SetActive(false);
     }
 }
