@@ -16,8 +16,7 @@ public class MapGenerator : MonoBehaviour {
 
     [SerializeField]
     int objectiveAmount;
-
-	// Use this for initialization
+    
 	void Start () {
         objectives = new List<Objective>();
         if(!LoadMapFile("Assets/Resources/testmap.mp"))
@@ -26,7 +25,6 @@ public class MapGenerator : MonoBehaviour {
         }
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	    
         if(Input.GetMouseButtonDown(0))
@@ -34,22 +32,19 @@ public class MapGenerator : MonoBehaviour {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             foreach(Objective o in objectives)
             {
-                if (o.GetComponent<SpriteRenderer>().bounds.Contains(mousePos))
+                if (o.GetComponent<SpriteRenderer>().bounds.Contains(mousePos) && o.Active)
                 {
                     Application.LoadLevel(o.Destination);
                 }
             }
-            
-
         }
-
 	}
 
-    void LoadObjective(Vector2 pos, string destScene)
+    void LoadObjective(Vector2 pos, string destScene, string active, string next, string name)
     {
         Objective clone;
         clone = Instantiate(objPrefab, pos, Quaternion.identity) as Objective;
-        clone.Init(destScene);
+        clone.Init(destScene, active, next, name);
         objectives.Add(clone);
     }
 
@@ -67,22 +62,18 @@ public class MapGenerator : MonoBehaviour {
             
             using (reader)
             {
-
                 do
                 {
                     line = reader.ReadLine();
 
-                    
                     if(line != null)
                     {
-                       
-                        Debug.Log(line);
                         entries = line.Split(' ');
                         if (entries.Length > 0)
                         {
                             switch (entries[0]){
                                 case "objective":
-                                    LoadObjective(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])), entries[3]);
+                                    LoadObjective(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])), entries[3], entries[4], entries[5], entries[6]);
                                     break;
                                 case "curpos":
                                     LoadCurPos(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])));
@@ -91,22 +82,16 @@ public class MapGenerator : MonoBehaviour {
                                     break;
                             }
                         }
-                        
                     }
-
-
                 } while (line != null);
                 reader.Close();
                 return true;
-
             }
-
         } catch (IOException e)
         {
             Debug.Log(e.Message);
             return false;
         }
-
     }
 
 }
