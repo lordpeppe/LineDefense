@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class projectile_Behaviour : MonoBehaviour {
+public class ProjectileBehaviour : MonoBehaviour {
     public float damage;
     public float despawnTime;
 
 
-    // Use this for initialization
-    void Start () {
-	
+    void Start () 
+	{	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
+	void Update () 
+	{
 	}
 
     void OnCollisionEnter2D(Collision2D other)
