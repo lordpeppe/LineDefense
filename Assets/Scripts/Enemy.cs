@@ -20,23 +20,11 @@ public class Enemy : MonoBehaviour
         currentHealth = initHealth;
     }
 
-    void Update()
-    {
-        if (!IsDestroyed())
-        {
-            //Move(-5.74f , -1.08f);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
     protected void Move(float HQX, float HQY)
     {
         Vector3 temp = new Vector3(HQX - transform.position.x, HQY - transform.position.y, 0);
         temp *= (speed / temp.magnitude) ;
-        transform.position += temp;
+        transform.position += temp * Time.deltaTime;
     }
 
     public void TakeDamage(float damage)
@@ -44,7 +32,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
     }
 
-    bool IsDestroyed()
+    protected bool IsDestroyed()
     {
         if (currentHealth <= 0)
         {
