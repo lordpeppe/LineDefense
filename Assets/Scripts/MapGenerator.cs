@@ -16,15 +16,22 @@ public class MapGenerator : MonoBehaviour {
 
     [SerializeField]
     Material lineMat;
+
+    string resourcePath = "Assets/Resources/";
     
 
     int objectiveAmount;
     void Start()
     {
         objectives = new List<Objective>();
-        if(!LoadMapFile("Assets/Resources/testmap.mp"))
+        if(!LoadMapFile("testmap.mp"))
         {
             Debug.Log("Text file could not be loaded");
+        }
+
+        if (!SaveMapFile(objectives, new Vector2(0, 0), "test.mp"))
+        {
+            Debug.Log("Text file could not be saved");
         }
         
 	}
@@ -63,7 +70,7 @@ public class MapGenerator : MonoBehaviour {
         string[] entries;
         try {
             string line;
-            StreamReader reader = new StreamReader(fileName, Encoding.Default);
+            StreamReader reader = new StreamReader(resourcePath + fileName, Encoding.Default);
             
             using (reader)
             {
@@ -92,6 +99,32 @@ public class MapGenerator : MonoBehaviour {
                 reader.Close();
                 return true;
             }
+        } catch (IOException e)
+        {
+            Debug.Log(e.Message);
+            return false;
+        }
+    }
+
+    bool SaveMapFile(List<Objective> objectiveList, Vector2 curPos, string fileName)
+    {
+
+        try
+        {
+
+            StreamWriter writer = new StreamWriter(resourcePath + fileName);
+
+            foreach(Objective o in objectiveList)
+            {
+                string res = "objective " + o.transform.position.x + " " + o.transform.position.y + " " + o.Next + " " + o.name;
+                writer.WriteLine(res);
+            }
+
+            writer.WriteLine("curPos " + curPos.x + " " + curPos.y);
+
+            writer.Close();
+            return true;
+
         } catch (IOException e)
         {
             Debug.Log(e.Message);
