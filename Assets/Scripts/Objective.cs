@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Objective : MonoBehaviour {
     
@@ -7,6 +8,9 @@ public class Objective : MonoBehaviour {
     private bool active;
     private string next;
     private string objName;
+
+    [SerializeField]
+    List<Sprite> sprites;
 
     public string Name
     {
@@ -46,6 +50,10 @@ public class Objective : MonoBehaviour {
 
         if (act.Equals("act")) active = true;
         else active = false;
+        if (active)
+            GetComponent<SpriteRenderer>().sprite = sprites[0];
+        else
+            GetComponent<SpriteRenderer>().sprite = sprites[1];
         this.next = next;
         gameObject.name = name;
     }
