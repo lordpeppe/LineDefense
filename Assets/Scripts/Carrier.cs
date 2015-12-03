@@ -46,7 +46,8 @@ public class Carrier : Enemy
 
 	IEnumerator SpawnSpawn()
 	{
-		Instantiate (spawnPrefab, transform.position, Quaternion.identity);
+		GameObject enemy = Instantiate (spawnPrefab, transform.position, Quaternion.identity) as GameObject;
+		enemy.GetComponent<KamikazeEnemy> ().ResetHealth ();
 		yield return new WaitForSeconds(1f);
 		StartCoroutine (SpawnSpawn ());
 	}

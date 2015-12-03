@@ -2,18 +2,20 @@
 using System.Collections;
 
 public class HQ : MonoBehaviour {
-    public float initHealth;
-    private float currentHealth;
-	// Use this for initialization
+    
+	[SerializeField]
+	private float initHealth;
+    
+	private float currentHealth;
+
 	void Start () {
         gameObject.SetActive(true);
         currentHealth = initHealth;
  
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        if (isDestroyed())
+        if (IsDestroyed())
         {
             gameObject.SetActive(false);
         }
@@ -25,13 +27,9 @@ public class HQ : MonoBehaviour {
         currentHealth -= damage;
     }
 
-    bool isDestroyed()
+    bool IsDestroyed()
     {
-        if (currentHealth <= 0)
-        {
-            return true;
-        }
-        else return false;
+		return currentHealth <= 0;
     }
     
     

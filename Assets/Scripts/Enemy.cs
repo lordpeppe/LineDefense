@@ -8,9 +8,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
     protected float speed;
     [SerializeField]
-	private float initHealth;
+	protected float initHealth;
 	[SerializeField]
-	private float damage;
+	protected float damage;
 
     private float currentHealth;
     
@@ -20,9 +20,9 @@ public class Enemy : MonoBehaviour
         currentHealth = initHealth;
     }
 
-    protected void Move(float HQX, float HQY)
+    protected void Move(float x, float y)
     {
-        Vector3 temp = new Vector3(HQX - transform.position.x, HQY - transform.position.y, 0);
+        Vector3 temp = new Vector3(x - transform.position.x, y - transform.position.y, 0);
         temp *= (speed / temp.magnitude) ;
         transform.position += temp * Time.deltaTime;
     }
@@ -34,26 +34,11 @@ public class Enemy : MonoBehaviour
 
     protected bool IsDestroyed()
     {
-        if (currentHealth <= 0)
-        {
-            return true;
-        }
-        else return false;
+		return currentHealth <= 0;
     }
 
     public void ResetHealth()
     {
         currentHealth = initHealth;
-    }
-
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "HQ")
-        {
-            other.gameObject.GetComponent<HQ>().TakeDamage(damage);
-            gameObject.SetActive(false);
-
-        }
     }
 }
