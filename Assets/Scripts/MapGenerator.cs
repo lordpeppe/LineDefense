@@ -116,7 +116,8 @@ public class MapGenerator : MonoBehaviour {
 
             foreach(Objective o in objectiveList)
             {
-                string res = "objective " + o.transform.position.x + " " + o.transform.position.y + " " + o.Next + " " + o.name;
+                string act = (o.Active) ? "act" : "inact";
+                string res = "objective " + o.transform.position.x + " " + o.transform.position.y + " " + act + " " + o.Next + " " + o.name;
                 writer.WriteLine(res);
             }
 
