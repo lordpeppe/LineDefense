@@ -116,9 +116,7 @@ public class MapGenerator : MonoBehaviour {
 
             foreach(Objective o in objectiveList)
             {
-                string act = (o.Active) ? "act" : "inact";
-                string res = "objective " + o.transform.position.x + " " + o.transform.position.y + " " + act + " " + o.Next + " " + o.name;
-                writer.WriteLine(res);
+                writer.WriteLine(stringFromObjective(o.transform.position,o.Active,o.Next,o.name));
             }
 
             writer.WriteLine("curPos " + curPos.x + " " + curPos.y);
@@ -133,5 +131,11 @@ public class MapGenerator : MonoBehaviour {
         }
     }
     
+    private string stringFromObjective(Vector2 pos, bool active, string next, string name)
+    {
+        string act = active ? "act" : "inact";
+        string res = "objective " + pos.x + " " + pos.y + " " + act + " " + next + " " + name;
+        return res;
+    }
 
 }
