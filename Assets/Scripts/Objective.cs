@@ -47,8 +47,9 @@ public class Objective : MonoBehaviour {
         if (act.Equals("act")) active = true;
         else active = false;
         this.next = next;
-        this.objName = name;
+        gameObject.name = name;
     }
+    
     
 
 }
