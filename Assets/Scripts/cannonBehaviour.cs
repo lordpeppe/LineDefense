@@ -30,6 +30,7 @@ public class CannonBehaviour : MonoBehaviour
     void Update()
     {
         Vector3 mouse_pos = Input.mousePosition;
+		Debug.Log ("Mouse position is: " + Input.mousePosition);
         Vector3 player_pos = Camera.main.WorldToScreenPoint(this.transform.position);
 
         // Need to subtract player pos to get cannon rotation right
