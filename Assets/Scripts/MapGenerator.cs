@@ -17,11 +17,11 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField]
     Material lineMat;
 
-    string resourcePath = "Assets/Resources/";
-    
+	string resourcePath = "Assets/Resources/";
 
     int objectiveAmount;
-    void Start()
+    
+	void Start()
     {
         objectives = new List<Objective>();
         if(!LoadMapFile("testmap.mp"))
@@ -37,7 +37,8 @@ public class MapGenerator : MonoBehaviour {
 	}
     
 
-    void Update () {
+    void Update () 
+	{
 	    
         if(Input.GetMouseButtonDown(0))
         {
@@ -50,6 +51,11 @@ public class MapGenerator : MonoBehaviour {
                 }
             }
         }
+	}
+
+	void OnGUI()
+	{
+		
 	}
 
     void LoadObjective(Vector2 pos, string destScene, string active, string next, string name)

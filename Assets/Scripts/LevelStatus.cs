@@ -18,6 +18,7 @@ public class LevelStatus : MonoBehaviour
 
 	void Start () 
 	{
+		LevelManager.levelManager.goldCoins = 50;
 		maxHealth = currentHealth;
 	}
 	
@@ -56,7 +57,7 @@ public class LevelStatus : MonoBehaviour
 
 	}
 
-	private Texture2D MakeTex( int width, int height, Color col )
+	public static Texture2D MakeTex( int width, int height, Color col )
 	{
 		Color[] pix = new Color[width * height];
 		for( int i = 0; i < pix.Length; ++i )

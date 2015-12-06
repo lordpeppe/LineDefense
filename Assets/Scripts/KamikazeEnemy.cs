@@ -25,7 +25,7 @@ public class KamikazeEnemy : Enemy
 	{
 		if (!IsDestroyed())
 		{
-			Move(hq.transform.position.x , hq.transform.position.x);
+			Move(hq.transform.position.x , hq.transform.position.y);
 		}
 		else
 		{
