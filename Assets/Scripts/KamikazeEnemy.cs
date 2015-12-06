@@ -8,7 +8,8 @@ public class KamikazeEnemy : Enemy
 	[SerializeField]
 	GameObject explosionPrefab;
 
-	void Start () {
+	void Start () 
+	{
 		initHealth = 5;
 		speed = 3;
 		if (hq == null)

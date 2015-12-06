@@ -15,6 +15,7 @@ public class Carrier : Enemy
 
 	void Start () 
 	{
+		currentHealth = 100;
 		enemyTag = "CARRIER";
 		GoingToFirst = true;
 		position = transform.position;
@@ -23,24 +24,34 @@ public class Carrier : Enemy
 	
 	void Update () 
 	{
-		if (GoingToFirst) {
-			if (Mathf.Abs (startDestination.position.x - transform.position.x) > 0.05f && Mathf.Abs (startDestination.position.y - transform.position.y) > 0.05f) {
-				//Move(startDestination.position.x, startDestination.position.y);
-				Vector3 direction = (startDestination.position - transform.position).normalized;
-			    transform.position += (direction * Time.deltaTime);
+		if (!IsDestroyed ()) 
+		{
+			if (GoingToFirst) 
+			{
+				if (Mathf.Abs (startDestination.position.x - transform.position.x) > 0.05f && Mathf.Abs (startDestination.position.y - transform.position.y) > 0.05f) 
+				{
+					Vector3 direction = (startDestination.position - transform.position).normalized;
+					Debug.Log (direction);
+					transform.position += (direction * speed * Time.deltaTime);
+				} 
+				else
+					GoingToFirst = false;
+			} 
+			else 
+			{
+				if (Mathf.Abs (endDestination.position.x - transform.position.x) > 0.05f && Mathf.Abs (endDestination.position.y - transform.position.y) > 0.05f) 
+				{
+					Vector3 direction = (endDestination.position - transform.position).normalized;
+					transform.position += (direction * speed * Time.deltaTime);
+				} 
+				else
+					GoingToFirst = true;
 			}
-			else
-				GoingToFirst = false;
-		}
+		} 
 		else 
 		{
-			if (Mathf.Abs (endDestination.position.x - transform.position.x) > 0.05f && Mathf.Abs (endDestination.position.y - transform.position.y) > 0.05f) {
-				//Move (endDestination.position.x, endDestination.position.y);
-				Vector3 direction = (endDestination.position - transform.position).normalized;
-				transform.position += (direction * speed * Time.deltaTime);
-			}
-			else
-				GoingToFirst = true;
+			GameObject.FindGameObjectWithTag ("level").GetComponent<LevelStatus>().DecrementHealth();
+			Destroy (gameObject);
 		}
 	}
 

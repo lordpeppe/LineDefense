@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected float damage;
 
-    private float currentHealth;
+    protected float currentHealth;
     
 
     void Start()

@@ -18,7 +18,7 @@ public class LevelStatus : MonoBehaviour
 
 	void Start () 
 	{
-		LevelManager.levelManager.goldCoins = 50;
+		LevelManager.levelManager.GoldCoins = 50;
 		maxHealth = currentHealth;
 	}
 	

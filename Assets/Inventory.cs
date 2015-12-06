@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
 
 			textStyle = new GUIStyle ();
 			textStyle.normal.textColor = Color.black;
-			GUI.Label (new Rect (Camera.main.pixelWidth / 2 - 100 + 50, 210, 100, 100), LevelManager.levelManager.goldCoins + "", textStyle);
+			GUI.Label (new Rect (Camera.main.pixelWidth / 2 - 100 + 50, 210, 100, 100), LevelManager.levelManager.GoldCoins + "", textStyle);
 		}
 	}
 

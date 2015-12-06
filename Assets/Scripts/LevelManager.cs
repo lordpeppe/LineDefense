@@ -6,13 +6,13 @@ public class LevelManager : MonoBehaviour
 	public static LevelManager levelManager;
 
 	/* Playe data */
-	public int goldCoins { get; set; }
+	public int GoldCoins { get; set; }
 
 	void Awake ()
 	{
 		if (levelManager == null) 
 		{
-			goldCoins = 100;
+			GoldCoins = 100;
 			DontDestroyOnLoad (gameObject);
 			levelManager = this;
 		} 
