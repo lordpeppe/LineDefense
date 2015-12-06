@@ -29,6 +29,7 @@ public class KamikazeEnemy : Enemy
 		}
 		else
 		{
+			GameObject.FindGameObjectWithTag ("level").GetComponent<LevelStatus>().DecrementHealth();
 			StartCoroutine(Explode());
 		}
 	}
