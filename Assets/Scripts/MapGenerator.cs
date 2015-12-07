@@ -48,10 +48,10 @@ public class MapGenerator : MonoBehaviour {
         int counter = 0;
         bool first = true;
         List<Objective> objectiveList = new List<Objective>();
-        for (int i = -7; i <= 7; i++)
-            for (int j = -4; j <= 4; j++)
+        for (int i = -7; i <= 7; i += 2)
+            for (int j = -4; j <= 4; j += 2)
             {
-                if (Random.Range(0, 10) > 8)
+                if (Random.Range(0, 10) > 7)
                 {
                     string active = first ? "act" : "inact";
                     objectiveList.Add(LoadObjective(new Vector2(1f * i, -1f * j), "scene1", active, "obj2", "obj" + counter++));
