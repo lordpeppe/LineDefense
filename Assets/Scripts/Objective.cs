@@ -19,7 +19,7 @@ public class Objective : MonoBehaviour {
 
     public string Next
     {
-        get { return next; }
+        get; set;
     }
 
     public string Destination

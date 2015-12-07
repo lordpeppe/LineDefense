@@ -27,12 +27,12 @@ public class MapGenerator : MonoBehaviour {
     
 	void Start()
     {
-        
+        Random.seed = (int)System.DateTime.Now.Ticks;
         objectives = new List<Objective>();
         
         if (LevelManager.levelManager.ActiveMap == null)
         {
-            activeMap = LoadMapFile("testmap.mp");
+            activeMap = GenerateMap(); //LoadMapFile("testmap.mp");
             LevelManager.levelManager.SetMap(activeMap);
         }
         else
@@ -41,7 +41,31 @@ public class MapGenerator : MonoBehaviour {
         }
 
         
-	}
+    }
+
+    Map GenerateMap()
+    {
+        int counter = 0;
+        bool first = true;
+        List<Objective> objectiveList = new List<Objective>();
+        for (int i = -7; i <= 7; i++)
+            for (int j = -4; j <= 4; j++)
+            {
+                if (Random.Range(0, 10) > 8)
+                {
+                    string active = first ? "act" : "inact";
+                    objectiveList.Add(LoadObjective(new Vector2(1f * i, -1f * j), "scene1", active, "obj2", "obj" + counter++));
+                    first = false;
+                }
+            }
+
+        for(int i = 0; i < objectiveList.Count - 1; i++)
+        {
+            objectiveList[i].Next = objectiveList[i + 1].name; 
+        }
+
+        return new Map(objectiveList, new Vector2(-2.0f, 0f));
+    }
     
 
     void Update () 
@@ -92,81 +116,5 @@ public class MapGenerator : MonoBehaviour {
 
         LoadCurPos(map.CurPos);
     }
-
-    Map LoadMapFile(string fileName)
-    {
-        string[] entries;
-        try {
-            string line;
-            StreamReader reader = new StreamReader(resourcePath + fileName, Encoding.Default);
-            
-            using (reader)
-            {
-                do
-                {
-                    line = reader.ReadLine();
-
-                    if(line != null)
-                    {
-                        entries = line.Split(' ');
-                        if (entries.Length > 0)
-                        {
-                            switch (entries[0]){
-                                case "objective":
-                                    objectives.Add(LoadObjective(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])), entries[3], entries[4], entries[5], entries[6]));
-                                    break;
-                                case "curpos":
-                                    curPos = LoadCurPos(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])));
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                } while (line != null);
-                reader.Close();
-
-                Map activeMap = new Map(objectives, curPos);
-
-                return activeMap;
-            }
-        } catch (IOException e)
-        {
-            Debug.Log(e.Message);
-            return null;
-        }
-    }
-
-    bool SaveMapFile(List<Objective> objectiveList, Vector2 curPos, string fileName)
-    {
-
-        try
-        {
-
-            StreamWriter writer = new StreamWriter(resourcePath + fileName);
-
-            foreach(Objective o in objectiveList)
-            {
-                writer.WriteLine(stringFromObjective(o.transform.position,o.Active,o.Next,o.name));
-            }
-
-            writer.WriteLine("curPos " + curPos.x + " " + curPos.y);
-
-            writer.Close();
-            return true;
-
-        } catch (IOException e)
-        {
-            Debug.Log(e.Message);
-            return false;
-        }
-    }
     
-    private string stringFromObjective(Vector2 pos, bool active, string next, string name)
-    {
-        string act = active ? "act" : "inact";
-        string res = "objective " + pos.x + " " + pos.y + " " + act + " " + next + " " + name;
-        return res;
-    }
-
 }

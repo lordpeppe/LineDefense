@@ -48,9 +48,9 @@ public class LevelManager : MonoBehaviour
     {
         Application.LoadLevel(obj.Destination);
         CurObjective = obj;
-        foreach(Objective o in ActiveMap.Objectives)
+        foreach(GameObject go in GameObject.FindGameObjectsWithTag("objective"))
         {
-            o.gameObject.SetActive(false);
+            go.SetActive(false);
         }
     }
 }
