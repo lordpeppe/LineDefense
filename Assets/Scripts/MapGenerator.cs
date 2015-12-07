@@ -6,6 +6,7 @@ using System.IO;
 
 public class MapGenerator : MonoBehaviour {
 
+
     List<Objective> objectives;
 
     [SerializeField]
@@ -17,29 +18,34 @@ public class MapGenerator : MonoBehaviour {
     [SerializeField]
     Material lineMat;
 
+    Map activeMap;
+    Vector2 curPos;
+
 	string resourcePath = "Assets/Resources/";
 
     int objectiveAmount;
     
 	void Start()
     {
+        
         objectives = new List<Objective>();
-        if(!LoadMapFile("testmap.mp"))
+        
+        if (LevelManager.levelManager.ActiveMap == null)
         {
-            Debug.Log("Text file could not be loaded");
+            activeMap = LoadMapFile("testmap.mp");
+            LevelManager.levelManager.SetMap(activeMap);
+        }
+        else
+        {
+            LoadMap(LevelManager.levelManager.ActiveMap);
         }
 
-        if (!SaveMapFile(objectives, new Vector2(0, 0), "test.mp"))
-        {
-            Debug.Log("Text file could not be saved");
-        }
         
 	}
     
 
     void Update () 
 	{
-	    
         if(Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -47,31 +53,47 @@ public class MapGenerator : MonoBehaviour {
             {
                 if (o.GetComponent<SpriteRenderer>().bounds.Contains(mousePos) && o.Active)
                 {
-                    Application.LoadLevel(o.Destination);
+                    LevelManager.levelManager.SetLevelAndLoad(o);
                 }
             }
         }
 	}
+    
 
-	void OnGUI()
-	{
-		
-	}
-
-    void LoadObjective(Vector2 pos, string destScene, string active, string next, string name)
+    Objective LoadObjective(Vector2 pos, string destScene, string active, string next, string name)
     {
         Objective clone;
         clone = Instantiate(objPrefab, pos, Quaternion.identity) as Objective;
         clone.Init(destScene, active, next, name);
         objectives.Add(clone);
+
+        return clone;
     }
 
-    void LoadCurPos(Vector2 pos)
+    Vector2 LoadCurPos(Vector2 pos)
     {
         GameObject clone = Instantiate(curPosPrefab, pos, Quaternion.identity) as GameObject;
+
+        return pos;
     }
 
-    bool LoadMapFile(string fileName)
+    void LoadMap(Map map)
+    {
+        foreach (Objective o in map.Objectives)
+        {
+            if(o.Active)
+            {
+                LoadObjective(o.transform.position, o.Destination, "act", o.Next, o.name);
+            } else
+            {
+                LoadObjective(o.transform.position, o.Destination, "inact", o.Next, o.name);
+            }
+        }
+
+        LoadCurPos(map.CurPos);
+    }
+
+    Map LoadMapFile(string fileName)
     {
         string[] entries;
         try {
@@ -91,10 +113,10 @@ public class MapGenerator : MonoBehaviour {
                         {
                             switch (entries[0]){
                                 case "objective":
-                                    LoadObjective(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])), entries[3], entries[4], entries[5], entries[6]);
+                                    objectives.Add(LoadObjective(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])), entries[3], entries[4], entries[5], entries[6]));
                                     break;
                                 case "curpos":
-                                    LoadCurPos(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])));
+                                    curPos = LoadCurPos(new Vector2(float.Parse(entries[1]), float.Parse(entries[2])));
                                     break;
                                 default:
                                     break;
@@ -103,12 +125,15 @@ public class MapGenerator : MonoBehaviour {
                     }
                 } while (line != null);
                 reader.Close();
-                return true;
+
+                Map activeMap = new Map(objectives, curPos);
+
+                return activeMap;
             }
         } catch (IOException e)
         {
             Debug.Log(e.Message);
-            return false;
+            return null;
         }
     }
 

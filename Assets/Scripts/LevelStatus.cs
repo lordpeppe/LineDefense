@@ -24,8 +24,12 @@ public class LevelStatus : MonoBehaviour
 	
 	void Update () 
 	{
-		if (currentHealth <= 0)
-			Application.LoadLevel ("mapScene");
+        if (currentHealth <= 0)
+        {
+            LevelManager.levelManager.ActiveMap.ActivateObjective(LevelManager.levelManager.CurObjective.Next);
+            LevelManager.levelManager.ReloadMap("mapScene");
+        }
+
 	}
 
 	/* Used for drawing enemy status bar */

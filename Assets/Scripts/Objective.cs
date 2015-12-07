@@ -30,19 +30,14 @@ public class Objective : MonoBehaviour {
     public bool Active
     {
         get { return active; }
+        set { active = value; }
+    }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
     }
     
-	void Start () {
-	
-	}
-	
-	void Update () {
-	
-        if(Input.GetKeyDown("n"))
-        {
-            Application.LoadLevel(destinationLevel);
-        }
-	}
 
     public void Init(string dest, string act, string next, string name)
     {
@@ -57,6 +52,7 @@ public class Objective : MonoBehaviour {
         this.next = next;
         gameObject.name = name;
     }
+    
     
     
 

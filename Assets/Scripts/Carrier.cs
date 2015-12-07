@@ -32,7 +32,7 @@ public class Carrier : Enemy
 				if (Mathf.Abs (startDestination.position.x - transform.position.x) > 0.05f && Mathf.Abs (startDestination.position.y - transform.position.y) > 0.05f) 
 				{
 					Vector3 direction = (startDestination.position - transform.position).normalized;
-					Debug.Log (direction);
+
 					transform.position += (direction * speed * Time.deltaTime);
 				} 
 				else
