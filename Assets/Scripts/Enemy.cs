@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Enemy : MonoBehaviour
@@ -12,8 +13,12 @@ public class Enemy : MonoBehaviour
 	[SerializeField]
 	protected float damage;
 
+	[SerializeField]
+	protected GameObject xpText;
+
     protected float currentHealth;
     
+	protected int xp;
 
     void Start()
     {

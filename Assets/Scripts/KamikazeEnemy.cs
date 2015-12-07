@@ -10,6 +10,7 @@ public class KamikazeEnemy : Enemy
 
 	void Start () 
 	{
+		xp = 5;
 		initHealth = 5;
 		speed = 3;
 		if (hq == null)
@@ -47,6 +48,8 @@ public class KamikazeEnemy : Enemy
 	IEnumerator Explode()	
 	{
 		gameObject.SetActive(false);
+		GameObject text = Instantiate (xpText, Camera.main.WorldToScreenPoint(transform.position), Quaternion.identity) as GameObject;
+		text.GetComponent<XPText> ().Show (xp);
 		GameObject explosion = Instantiate (explosionPrefab, transform.position, Quaternion.identity) as GameObject;
 		yield return new WaitForSeconds (0.8f);
 		Destroy (explosion);

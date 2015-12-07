@@ -15,6 +15,7 @@ public class Carrier : Enemy
 
 	void Start () 
 	{
+		xp = 100;
 		currentHealth = 100;
 		enemyTag = "CARRIER";
 		GoingToFirst = true;
@@ -59,7 +60,7 @@ public class Carrier : Enemy
 	{
 		GameObject enemy = Instantiate (spawnPrefab, transform.position, Quaternion.identity) as GameObject;
 		enemy.GetComponent<KamikazeEnemy> ().ResetHealth ();
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(Random.Range(1,5));
 		StartCoroutine (SpawnSpawn ());
 	}
 }

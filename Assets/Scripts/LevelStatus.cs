@@ -41,8 +41,8 @@ public class LevelStatus : MonoBehaviour
 		innerBoxStylePlayer = new GUIStyle (GUI.skin.box);
 		innerBoxStylePlayer.normal.background = MakeTex (1, 1, Color.green);
 
-		textStyle = new GUIStyle (GUI.skin.box);
-		textStyle.normal.background = MakeTex (1, 1, Color.clear);
+		textStyle = new GUIStyle (GUI.skin.textArea);
+		textStyle.normal.textColor = Color.black;
 	
 		/* Enemy health bar */
 		GUI.TextField (new Rect (new Vector2 (40, 20), new Vector2(100,50)), "Enemy health", textStyle);

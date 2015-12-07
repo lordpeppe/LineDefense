@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour
 {
 	public static LevelManager levelManager;
 
+	public GameObject canvas;
 	/* Playe data */
 	public int GoldCoins { get; set; }
 
