@@ -16,30 +16,47 @@ public class ShipShooting : MonoBehaviour
 
 	private float speed = 15;
 
+	private bool CanShoot { get; set; }
+
+	private float cooldownTime = 0.2f;
+
 	void Start () 
 	{
+		CanShoot = true;
 		projectilePool = new Resource(defaultProjectile, projectileLimit, transform.position);
 	}
 	
 	void Update () 
 	{
-		if (Input.GetKeyDown (shoot)) 
+		if (Input.GetKey (shoot)) 
 		{
 			Shoot ();
 		}
+
 	}
 
 	void Shoot()
 	{
-		Rigidbody2D projectile = projectilePool.getNext();
-		projectile.transform.position = transform.position - new Vector3(0, 0.7f, 0);
-		projectile.gameObject.SetActive(true);
-		projectile.velocity = new Vector2(speed, 0);
+		if (CanShoot) {
+			Rigidbody2D projectile = projectilePool.getNext ();
+			projectile.transform.position = transform.position - new Vector3 (0, 0.7f, 0);
+			projectile.gameObject.SetActive (true);
+			projectile.velocity = new Vector2 (speed, 0);
 
-		Rigidbody2D projectile2 = projectilePool.getNext();
-		projectile2.transform.position = transform.position + new Vector3(0, 0.7f, 0);
-		projectile2.gameObject.SetActive(true);
-		projectile2.velocity = new Vector2(speed, 0);
+			Rigidbody2D projectile2 = projectilePool.getNext ();
+			projectile2.transform.position = transform.position + new Vector3 (0, 0.7f, 0);
+			projectile2.gameObject.SetActive (true);
+			projectile2.velocity = new Vector2 (speed, 0);
+			StartCoroutine (BulletCooldown ());
+			CanShoot = false;
+		}
 	}
+
+	IEnumerator BulletCooldown()
+	{
+		yield return new WaitForSeconds (cooldownTime);
+		CanShoot = true;
+	}
+
 
 }

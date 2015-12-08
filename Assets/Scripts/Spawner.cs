@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour
 	{
 		paths = new Dictionary<EnemyType, List<string>> ();
 		List<string> p = new List<string> ();
+		p.Add ("top");
 		p.Add ("midtop");
 		p.Add ("midbot");
 		paths.Add (EnemyType.Swinger, p);

@@ -31,6 +31,6 @@ public class SwingingEnemy : Enemy
 
 	public void FollowPath(string pathName)
 	{
-		iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath(pathName), "time", 10, "easetype", iTween.EaseType.linear));
+		iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath(pathName), "time", 6, "easetype", iTween.EaseType.linear));
 	}
 }

@@ -16,11 +16,13 @@ public class ShipMovement : MonoBehaviour {
 	{
 		if (Input.GetKey (up)) 
 		{
-			transform.Translate(Vector2.up * 10 * Time.deltaTime);
+			if(transform.position.y < Camera.main.ScreenToWorldPoint(new Vector2(0, Camera.main.pixelHeight)).y - spriteRenderer.bounds.extents.y)
+				transform.Translate(Vector2.up * 10 * Time.deltaTime);
 		} 
 		else if (Input.GetKey (down)) 
 		{
-			transform.Translate(Vector2.up * -10 * Time.deltaTime);
+			if(transform.position.y > Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y + spriteRenderer.bounds.extents.y)
+				transform.Translate(Vector2.up * -10 * Time.deltaTime);
 		} 
 		else if (Input.GetKey (left)) 
 		{
