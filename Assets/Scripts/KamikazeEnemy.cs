@@ -6,7 +6,7 @@ public class KamikazeEnemy : Enemy
 	[SerializeField]
 	private Transform hq;
 	[SerializeField]
-	GameObject explosionPrefab;
+	private GameObject explosionPrefab;
 
 	void Start () 
 	{

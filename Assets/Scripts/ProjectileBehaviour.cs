@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ProjectileBehaviour : MonoBehaviour {
-    public float damage;
+public class ProjectileBehaviour : MonoBehaviour 
+{
+
+	public float damage;
     public float despawnTime;
 
 

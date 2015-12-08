@@ -28,4 +28,9 @@ public class SwingingEnemy : Enemy
 		yield return new WaitForSeconds (0.8f);
 		Destroy (explosion);
 	}
+
+	public void FollowPath(string pathName)
+	{
+		iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath(pathName), "time", 10, "easetype", iTween.EaseType.linear));
+	}
 }
