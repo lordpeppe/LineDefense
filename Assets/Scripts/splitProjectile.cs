@@ -13,7 +13,11 @@ public class SplitProjectile : ProjectileBehaviour
     Vector3 destination;
     public float explosionSpeed;
     public Rigidbody2D powerUp;
-    
+
+    [SerializeField]
+    float explosionDistance;
+
+    float deltaTime;
 
 	// Use this for initialization
 	void Start () {
@@ -45,8 +49,9 @@ public class SplitProjectile : ProjectileBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        float distance = Vector3.Distance(destination, transform.position);
-	    if(distance < 0.5f)
+        deltaTime += Time.deltaTime;
+        
+	    if(deltaTime >= explosionDistance)
         {
             split();
         }
