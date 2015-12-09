@@ -53,7 +53,6 @@ public class MapGenerator : MonoBehaviour {
             {
                 if (Random.Range(0, 10) > 7)
                 {
-                    string active = first ? "act" : "inact";
                     objectiveList.Add(LoadObjective(new Vector2(1f * i, -1f * j), "scene1", first, null, "obj" + counter++));
                     first = false;
                 }
