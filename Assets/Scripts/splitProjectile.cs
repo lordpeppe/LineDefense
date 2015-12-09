@@ -5,14 +5,21 @@ using System.Collections.Generic;
 
 public class SplitProjectile : ProjectileBehaviour 
 {
+    [SerializeField]
+    Rigidbody2D projectileBody;
 
-    public  Rigidbody2D projectileBody;
-    public int splitProjectileLimit;
+    [SerializeField]
+    int splitProjectileLimit;
+
     Resource splitProjectilePool;
     List<Vector3> directionsList;
     Vector3 destination;
-    public float explosionSpeed;
-    public Rigidbody2D powerUp;
+
+    [SerializeField]
+    float explosionSpeed;
+
+    [SerializeField]
+    Rigidbody2D powerUp;
 
     [SerializeField]
     float explosionDistance;
@@ -54,6 +61,7 @@ public class SplitProjectile : ProjectileBehaviour
 	    if(deltaTime >= explosionDistance)
         {
             split();
+            deltaTime = 0;
         }
 	}
 
@@ -63,7 +71,7 @@ public class SplitProjectile : ProjectileBehaviour
         
         for (int i = 0; i < splitProjectileLimit; i++)
         {
-            Rigidbody2D temp = splitProjectilePool.getNext();
+            Rigidbody2D temp = splitProjectilePool.GetNext();
             temp.gameObject.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             temp.velocity = directionsList[i] * explosionSpeed;

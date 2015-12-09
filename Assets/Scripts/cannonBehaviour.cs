@@ -55,7 +55,7 @@ public class CannonBehaviour : MonoBehaviour
     void shoot(Vector2 dir, Vector2 player)
     {
         Vector3 dirPrime = dir.normalized;
-        Rigidbody2D projectile = activePool.getNext();
+        Rigidbody2D projectile = activePool.GetNext();
         projectile.transform.position = transform.position;
         projectile.gameObject.SetActive(true);
         projectile.velocity = (dirPrime * speed);

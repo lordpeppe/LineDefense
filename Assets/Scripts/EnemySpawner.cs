@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Rigidbody2D realEnemy = enemyPool.getNext();
+        Rigidbody2D realEnemy = enemyPool.GetNext();
         realEnemy.transform.position = transform.position;
         realEnemy.gameObject.SetActive(true);
         realEnemy.GetComponent<Enemy>().ResetHealth();

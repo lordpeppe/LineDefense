@@ -6,7 +6,7 @@ public class Resource
 {
 
     List<Rigidbody2D> resourcePool;
-    int resourceIndex;
+    int resourceIndex = 0;
     int amount;
 
 	public Resource(Rigidbody2D prefab, int amount, Vector3 position)
@@ -23,7 +23,7 @@ public class Resource
         }
     }
 
-   public Rigidbody2D getNext()
+   public Rigidbody2D GetNext()
     {
         if (resourceIndex < amount - 1)
         {
