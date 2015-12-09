@@ -6,7 +6,6 @@ public class Objective : MonoBehaviour {
     
     private string destinationLevel;
     private bool active;
-    private string next;
     private string objName;
 
     [SerializeField]
@@ -17,7 +16,7 @@ public class Objective : MonoBehaviour {
         get { return objName; }
     }
 
-    public string Next
+    public Objective Next
     {
         get; set;
     }
@@ -39,17 +38,16 @@ public class Objective : MonoBehaviour {
     }
     
 
-    public void Init(string dest, string act, string next, string name)
+    public void Init(string dest, bool act, Objective next, string name)
     {
         destinationLevel = dest;
 
-        if (act.Equals("act")) active = true;
-        else active = false;
+        active = act;
         if (active)
             GetComponent<SpriteRenderer>().sprite = sprites[0];
         else
             GetComponent<SpriteRenderer>().sprite = sprites[1];
-        this.next = next;
+        this.Next = next;
         gameObject.name = name;
     }
     

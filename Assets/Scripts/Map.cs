@@ -16,14 +16,14 @@ public class Map  {
         curPos = initPos;
     }
 
-    public void ActivateObjective(string name)
+    public void ActivateObjective(Objective obj)
     {
         List<Objective> temp = new List<Objective>();
         
         foreach (Objective o in objectives)
         {
 
-            if (o.name.Equals(name))
+            if (o.Equals(obj))
             {
                 o.Active = true;
                 break;

@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour {
         
         if (LevelManager.levelManager.ActiveMap == null)
         {
-            activeMap = GenerateMap(); //LoadMapFile("testmap.mp");
+            activeMap = GenerateMap();
             LevelManager.levelManager.SetMap(activeMap);
         }
         else
@@ -54,14 +54,14 @@ public class MapGenerator : MonoBehaviour {
                 if (Random.Range(0, 10) > 7)
                 {
                     string active = first ? "act" : "inact";
-                    objectiveList.Add(LoadObjective(new Vector2(1f * i, -1f * j), "scene1", active, "obj2", "obj" + counter++));
+                    objectiveList.Add(LoadObjective(new Vector2(1f * i, -1f * j), "scene1", first, null, "obj" + counter++));
                     first = false;
                 }
             }
 
         for(int i = 0; i < objectiveList.Count - 1; i++)
         {
-            objectiveList[i].Next = objectiveList[i + 1].name; 
+            objectiveList[i].Next = GameObject.Find(objectiveList[i + 1].name).GetComponent<Objective>(); 
         }
 
         return new Map(objectiveList, new Vector2(-2.0f, 0f));
@@ -84,7 +84,7 @@ public class MapGenerator : MonoBehaviour {
 	}
     
 
-    Objective LoadObjective(Vector2 pos, string destScene, string active, string next, string name)
+    Objective LoadObjective(Vector2 pos, string destScene, bool active, Objective next, string name)
     {
         Objective clone;
         clone = Instantiate(objPrefab, pos, Quaternion.identity) as Objective;
@@ -107,10 +107,10 @@ public class MapGenerator : MonoBehaviour {
         {
             if(o.Active)
             {
-                LoadObjective(o.transform.position, o.Destination, "act", o.Next, o.name);
+                LoadObjective(o.transform.position, o.Destination, true, o.Next, o.name);
             } else
             {
-                LoadObjective(o.transform.position, o.Destination, "inact", o.Next, o.name);
+                LoadObjective(o.transform.position, o.Destination, false, o.Next, o.name);
             }
         }
 
