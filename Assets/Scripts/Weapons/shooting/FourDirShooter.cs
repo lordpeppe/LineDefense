@@ -8,12 +8,6 @@ public class FourDirShooter : AbstractShooter {
         Init();
     }
 
-    void Update()
-    {
-
-
-    }
-
     public override void AuxShoot(Resource projectilePool, float speed)
     {
 

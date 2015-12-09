@@ -3,18 +3,11 @@ using System.Collections;
 
 public class ProjectileBehaviour : MonoBehaviour 
 {
+	[SerializeField]
+	private float damage;
 
-	public float damage;
-    public float despawnTime;
-
-
-    void Start () 
-	{	
-	}
-	
-	void Update () 
-	{
-	}
+	[SerializeField]
+    private float despawnTime;
 
     void OnCollisionEnter2D(Collision2D other)
     {

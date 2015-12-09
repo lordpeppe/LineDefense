@@ -3,21 +3,21 @@ using System.Collections;
 
 public abstract class AbstractShooter : MonoBehaviour {
 
-    private Resource projectilePool;
+    protected Resource projectilePool;
 
     [SerializeField]
-    private Rigidbody2D defaultProjectile;
+    protected Rigidbody2D defaultProjectile;
 
     [SerializeField]
-    private int projectileLimit = 20;
+    protected int projectileLimit = 20;
 
     [SerializeField]
-    private float speed = 15;
+    protected float speed = 15;
 
-    private bool CanShoot { get; set; }
+    protected bool CanShoot { get; set; }
 
     [SerializeField]
-    private float cooldownTime = 0.2f;
+    protected float cooldownTime = 0.2f;
 
 
     public void Init()
