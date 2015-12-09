@@ -21,7 +21,7 @@ public class MapGenerator : MonoBehaviour {
     Map activeMap;
     Vector2 curPos;
 
-	string resourcePath = "Assets/Resources/";
+
 
     int objectiveAmount;
     

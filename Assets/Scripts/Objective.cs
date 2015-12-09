@@ -6,15 +6,10 @@ public class Objective : MonoBehaviour {
     
     private string destinationLevel;
     private bool active;
-    private string objName;
 
     [SerializeField]
     List<Sprite> sprites;
-
-    public string Name
-    {
-        get { return objName; }
-    }
+    
 
     public Objective Next
     {

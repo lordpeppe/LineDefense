@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     private Resource enemyPool;
     public int enemyLimit;
     public Rigidbody2D enemy;
-    private int poolIndex = 0;
+
     public float spawnTimer;
     private float deltaTime = 0.0F;
 	
