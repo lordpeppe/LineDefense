@@ -8,7 +8,7 @@ public class GunWrapper : MonoBehaviour {
     private KeyCode shoot;
 
     [SerializeField]
-    List<ShipShooting> shotList;
+    List<AbstractShooter> shotList;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class GunWrapper : MonoBehaviour {
 
         if (Input.GetKey(shoot))
         {
-            foreach (ShipShooting sh in shotList)
+            foreach (AbstractShooter sh in shotList)
             {
                 sh.Shoot();
             }

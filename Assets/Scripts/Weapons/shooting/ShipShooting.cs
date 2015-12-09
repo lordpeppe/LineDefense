@@ -1,28 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShipShooting : MonoBehaviour 
+public class ShipShooting : AbstractShooter 
 {
-
-	private Resource projectilePool;
-
-	[SerializeField]
-	private Rigidbody2D defaultProjectile;
-
-	[SerializeField]
-	private int projectileLimit = 20;
-
-	private float speed = 15;
-
-	private bool CanShoot { get; set; }
-
-	private float cooldownTime = 0.2f;
 
 	void Start () 
 	{
-        transform.position = transform.parent.position;
-		CanShoot = true;
-		projectilePool = new Resource(defaultProjectile, projectileLimit, transform.position);
+        Init();   
 	}
 	
 	void Update () 
@@ -31,9 +15,9 @@ public class ShipShooting : MonoBehaviour
 
 	}
 
-	public void Shoot()
+	public override void AuxShoot(Resource projectilePool, float speed)
 	{
-		if (CanShoot) {
+		
 			Rigidbody2D projectile = projectilePool.GetNext ();
 			projectile.transform.position = transform.position - new Vector3 (0, 0.7f, 0);
 			projectile.gameObject.SetActive (true);
@@ -43,16 +27,10 @@ public class ShipShooting : MonoBehaviour
 			projectile2.transform.position = transform.position + new Vector3 (0, 0.7f, 0);
 			projectile2.gameObject.SetActive (true);
 			projectile2.velocity = new Vector2 (speed, 0);
-			StartCoroutine (BulletCooldown ());
-			CanShoot = false;
-		}
+			
 	}
 
-	IEnumerator BulletCooldown()
-	{
-		yield return new WaitForSeconds (cooldownTime);
-		CanShoot = true;
-	}
+	
 
 
 }
