@@ -13,7 +13,6 @@ public class SplitProjectile : ProjectileBehaviour
 
     Resource splitProjectilePool;
     List<Vector3> directionsList;
-    Vector3 destination;
 
     [SerializeField]
     float explosionSpeed;
@@ -76,17 +75,12 @@ public class SplitProjectile : ProjectileBehaviour
             temp.gameObject.SetActive(true);
             temp.velocity = directionsList[i] * explosionSpeed;
             temp.GetComponent<ProjectileBehaviour>().Despawner();
-            
         }
         gameObject.SetActive(false);
 
 
     }
-
-    public void setDestination(Vector3 destination)
-    {
-        this.destination = destination;
-    }
+    
 
     void OnCollision2D(Collision2D other)
     {

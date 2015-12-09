@@ -17,12 +17,9 @@ public class Map  {
     }
 
     public void ActivateObjective(Objective obj)
-    {
-        List<Objective> temp = new List<Objective>();
-        
+    {   
         foreach (Objective o in objectives)
         {
-
             if (o.Equals(obj))
             {
                 o.Active = true;

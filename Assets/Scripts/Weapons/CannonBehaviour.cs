@@ -64,7 +64,6 @@ public class CannonBehaviour : MonoBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(dir.x + player.x, dir.y + player.y, 0));
             mousePos = new Vector3(mousePos.x, mousePos.y, 0);
-            projectile.GetComponent<SplitProjectile>().setDestination(mousePos);
 
         }
   

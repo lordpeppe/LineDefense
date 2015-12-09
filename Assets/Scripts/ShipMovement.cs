@@ -4,7 +4,7 @@ using System.Collections;
 public class ShipMovement : MonoBehaviour {
 
 	[SerializeField]
-	private KeyCode up, down, left, right, shoot;
+	private KeyCode up, down, left, right;
 	private SpriteRenderer spriteRenderer;
 
 	void Start () 

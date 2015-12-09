@@ -6,14 +6,22 @@ public class FlameCannonBehaviour : MonoBehaviour
     private Vector3 mouse_pos;
     private Vector3 object_pos;
     private float angle;
-    public Rigidbody2D Default_Projectile;
-    public Rigidbody2D splitProjectile;
+
+    [SerializeField]
+    Rigidbody2D Default_Projectile;
+
+    [SerializeField]
+    Rigidbody2D splitProjectile;
     private float speed = 10;
-    public int projectileLimit;
+
+    [SerializeField]
+    int projectileLimit;
     private Resource projectilePool;
     private Resource splitProjectilePool;
     private Resource activePool;
-    public float flameRange;
+
+    [SerializeField]
+    float flameRange;
 
     void Start()
     {
@@ -63,8 +71,6 @@ public class FlameCannonBehaviour : MonoBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(dir.x + player.x, dir.y + player.y, 0));
             mousePos = new Vector3(mousePos.x, mousePos.y, 0);
-            projectile.GetComponent<SplitProjectile>().setDestination(mousePos);
-
         }
 
 
