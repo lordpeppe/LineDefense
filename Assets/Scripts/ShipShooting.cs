@@ -22,20 +22,18 @@ public class ShipShooting : MonoBehaviour
 
 	void Start () 
 	{
+        transform.position = transform.parent.position;
 		CanShoot = true;
 		projectilePool = new Resource(defaultProjectile, projectileLimit, transform.position);
 	}
 	
 	void Update () 
 	{
-		if (Input.GetKey (shoot)) 
-		{
-			Shoot ();
-		}
+		
 
 	}
 
-	void Shoot()
+	public void Shoot()
 	{
 		if (CanShoot) {
 			Rigidbody2D projectile = projectilePool.getNext ();

@@ -48,7 +48,6 @@ public class SplitProjectile : ProjectileBehaviour
         float distance = Vector3.Distance(destination, transform.position);
 	    if(distance < 0.5f)
         {
-            Debug.Log("Splitting");
             split();
         }
 	}
@@ -74,6 +73,11 @@ public class SplitProjectile : ProjectileBehaviour
     public void setDestination(Vector3 destination)
     {
         this.destination = destination;
+    }
+
+    void OnCollision2D(Collision2D other)
+    {
+        split();
     }
 
   
