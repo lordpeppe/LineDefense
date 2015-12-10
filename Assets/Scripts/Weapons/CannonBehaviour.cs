@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class FlameCannonBehaviour : MonoBehaviour
+public class CannonBehaviour : MonoBehaviour
 {
+
     private Vector3 mouse_pos;
     private Vector3 object_pos;
     private float angle;
@@ -13,13 +15,17 @@ public class FlameCannonBehaviour : MonoBehaviour
     private Resource projectilePool;
     private Resource splitProjectilePool;
     private Resource activePool;
-    public float flameRange;
 
+
+
+    // Use this for initialization
     void Start()
     {
+        projectilePool = new Resource(Default_Projectile, projectileLimit, transform.position);
+        splitProjectilePool = new Resource(splitProjectile, projectileLimit, transform.position);
+        activePool = projectilePool;
 
     }
-
 
     void Update()
     {
@@ -46,15 +52,12 @@ public class FlameCannonBehaviour : MonoBehaviour
             activePool = projectilePool;
         }
 
-
-
     }
-
 
     void shoot(Vector2 dir, Vector2 player)
     {
         Vector3 dirPrime = dir.normalized;
-        Rigidbody2D projectile = activePool.getNext();
+        Rigidbody2D projectile = activePool.GetNext();
         projectile.transform.position = transform.position;
         projectile.gameObject.SetActive(true);
         projectile.velocity = (dirPrime * speed);
@@ -63,12 +66,9 @@ public class FlameCannonBehaviour : MonoBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(dir.x + player.x, dir.y + player.y, 0));
             mousePos = new Vector3(mousePos.x, mousePos.y, 0);
-            projectile.GetComponent<splitProjectile>().setDestination(mousePos);
 
         }
 
 
     }
-
 }
-

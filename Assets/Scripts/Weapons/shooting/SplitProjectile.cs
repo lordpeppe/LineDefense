@@ -3,18 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class splitProjectile : projectile_Behaviour {
-   public  Rigidbody2D projectileBody;
-    public int splitProjectileLimit;
+public class SplitProjectile : ProjectileBehaviour
+{
+    [SerializeField]
+    Rigidbody2D projectileBody;
+
+    [SerializeField]
+    int splitProjectileLimit;
+
     Resource splitProjectilePool;
     List<Vector3> directionsList;
-    Vector3 destination;
-    public float explosionSpeed;
-    public Rigidbody2D powerUp;
-    
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    float explosionSpeed;
+
+    [SerializeField]
+    Rigidbody2D powerUp;
+
+    [SerializeField]
+    float explosionDistance;
+
+    float deltaTime;
+
+    // Use this for initialization
+    void Start()
+    {
 
         explosionSpeed = Mathf.Max(explosionSpeed, 1);
         directionsList = new List<Vector3>();
@@ -36,46 +49,44 @@ public class splitProjectile : projectile_Behaviour {
         directionsList.Add(new Vector3(Mathf.Cos(337.5f * Mathf.Deg2Rad), Mathf.Sin(337.5f * Mathf.Deg2Rad), 0));
 
 
-
-
-
         splitProjectilePool = new Resource(projectileBody, splitProjectileLimit, transform.position);
 
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-        float distance = Vector3.Distance(destination, transform.position);
-	    if(distance < 0.5f)
+        deltaTime += Time.deltaTime;
+
+        if (deltaTime >= explosionDistance)
         {
-            Debug.Log("Splitting");
             split();
+            deltaTime = 0;
         }
-	}
+    }
 
     void split()
     {
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        
+
         for (int i = 0; i < splitProjectileLimit; i++)
         {
-            Rigidbody2D temp = splitProjectilePool.getNext();
+            Rigidbody2D temp = splitProjectilePool.GetNext();
             temp.gameObject.transform.position = transform.position;
             temp.gameObject.SetActive(true);
             temp.velocity = directionsList[i] * explosionSpeed;
-            temp.GetComponent<projectile_Behaviour>().Despawner();
-            
+            temp.GetComponent<ProjectileBehaviour>().Despawner();
         }
         gameObject.SetActive(false);
 
 
     }
 
-    public void setDestination(Vector3 destination)
+
+    void OnCollision2D(Collision2D other)
     {
-        this.destination = destination;
+        split();
     }
 
-  
+
 }

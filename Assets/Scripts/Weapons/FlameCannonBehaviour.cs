@@ -1,31 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class cannonBehaviour : MonoBehaviour
+public class FlameCannonBehaviour : MonoBehaviour
 {
-
     private Vector3 mouse_pos;
     private Vector3 object_pos;
     private float angle;
-    public Rigidbody2D Default_Projectile;
-    public Rigidbody2D splitProjectile;
+
+    [SerializeField]
+    Rigidbody2D Default_Projectile;
+
+    [SerializeField]
+    Rigidbody2D splitProjectile;
     private float speed = 10;
-    public int projectileLimit;
+
+    [SerializeField]
+    int projectileLimit;
     private Resource projectilePool;
     private Resource splitProjectilePool;
     private Resource activePool;
 
+    [SerializeField]
+    float flameRange;
 
-
-    // Use this for initialization
     void Start()
     {
-        projectilePool = new Resource(Default_Projectile, projectileLimit, transform.position);
-        splitProjectilePool = new Resource(splitProjectile, projectileLimit, transform.position);
-        activePool = projectilePool;
-        
+
     }
+
 
     void Update()
     {
@@ -46,28 +48,32 @@ public class cannonBehaviour : MonoBehaviour
         if (Input.GetKeyDown("o"))
         {
             activePool = splitProjectilePool;
-        } else if (Input.GetKeyDown("p")) {
+        }
+        else if (Input.GetKeyDown("p"))
+        {
             activePool = projectilePool;
         }
-        
+
+
+
     }
+
 
     void shoot(Vector2 dir, Vector2 player)
     {
         Vector3 dirPrime = dir.normalized;
-        Rigidbody2D projectile = activePool.getNext();
+        Rigidbody2D projectile = activePool.GetNext();
         projectile.transform.position = transform.position;
         projectile.gameObject.SetActive(true);
         projectile.velocity = (dirPrime * speed);
 
-        if(activePool.Equals(splitProjectilePool))
+        if (activePool.Equals(splitProjectilePool))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(dir.x + player.x, dir.y + player.y, 0));
             mousePos = new Vector3(mousePos.x, mousePos.y, 0);
-            projectile.GetComponent<splitProjectile>().setDestination(mousePos);
-
         }
-  
+
 
     }
+
 }

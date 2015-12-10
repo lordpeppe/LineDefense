@@ -1,38 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HQ : MonoBehaviour {
-    public float initHealth;
+public class HQ : MonoBehaviour
+{
+
+    [SerializeField]
+    private float initHealth;
+
     private float currentHealth;
-	// Use this for initialization
-	void Start () {
+
+    public float CurrentHealth { get { return currentHealth; } }
+
+    public float InitHealth { get { return initHealth; } }
+
+    void Start()
+    {
         gameObject.SetActive(true);
         currentHealth = initHealth;
- 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (isDestroyed())
+
+    }
+
+    void Update()
+    {
+        if (IsDestroyed())
         {
             gameObject.SetActive(false);
         }
-        
     }
 
-  public  void takeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
     }
 
-    bool isDestroyed()
+    bool IsDestroyed()
     {
-        if (currentHealth <= 0)
-        {
-            return true;
-        }
-        else return false;
+        return currentHealth <= 0;
     }
-    
-    
+
+
+
 }

@@ -7,42 +7,34 @@ public class EnemySpawner : MonoBehaviour
     private Resource enemyPool;
     public int enemyLimit;
     public Rigidbody2D enemy;
-    private int poolIndex = 0;
+
     public float spawnTimer;
     private float deltaTime = 0.0F;
 
-
-
-
-    // Use this for initialization
     void Start()
     {
         enemyPool = new Resource(enemy, enemyLimit, transform.position);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(deltaTime > spawnTimer)
+        if (deltaTime > spawnTimer)
         {
-            spawnEnemy();
+            SpawnEnemy();
             deltaTime = 0.0F;
-        } else
+        }
+        else
         {
             deltaTime += Time.deltaTime;
         }
-            
-            
     }
 
-
-    void spawnEnemy()
+    void SpawnEnemy()
     {
-        Rigidbody2D realEnemy = enemyPool.getNext();
+        Rigidbody2D realEnemy = enemyPool.GetNext();
         realEnemy.transform.position = transform.position;
         realEnemy.gameObject.SetActive(true);
-        realEnemy.GetComponent<Enemy>().resetHealth();
-        
+        realEnemy.GetComponent<Enemy>().ResetHealth();
 
     }
 }

@@ -22,8 +22,7 @@ public class FlyingUI : MonoBehaviour {
 	}
 		
 	void OnGUI()
-	{
-		Debug.Log ("LOOOL");
+    { 
 		levelRect = new GUIStyle (GUI.skin.box);
 		levelRect.normal.background = LevelStatus.MakeTex (1, 1, Color.grey);
 		GUI.Box (new Rect (10, 10, 200, 20), "", levelRect);
