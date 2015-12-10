@@ -24,7 +24,11 @@ public class Resource
         }
     }
 
+<<<<<<< HEAD:Assets/Scripts/Util/Resource.cs
     public Rigidbody2D GetNext()
+=======
+   public Rigidbody2D GetNext()
+>>>>>>> 97570b7decc2625570b25b67193885b4515292be:Assets/Scripts/Resource.cs
     {
         if (resourceIndex < amount - 1)
         {
