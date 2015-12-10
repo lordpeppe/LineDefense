@@ -2,15 +2,13 @@
 using System.Collections;
 using System;
 
-<<<<<<< HEAD
-public class LaserWeapon : AbstractShooter 
-{
+
 	
-=======
+
 public class LaserWeapon : AbstractShooter {
 
 
->>>>>>> bcd280e05da96225d48ae805f828c583b2d34c5e
+
     public override void AuxShoot(Resource projectilePool, float speed)
     {
 
