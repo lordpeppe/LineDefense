@@ -2,7 +2,9 @@
 using System.Collections;
 using System;
 
-public class LaserWeapon : AbstractShooter {
+public class LaserWeapon : AbstractShooter 
+{
+	
     public override void AuxShoot(Resource projectilePool, float speed)
     {
 
@@ -18,12 +20,14 @@ public class LaserWeapon : AbstractShooter {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+	{
         Init();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	
 	}
 }
