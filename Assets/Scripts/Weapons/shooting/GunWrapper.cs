@@ -3,9 +3,13 @@ using System.Collections.Generic;
 
 public class GunWrapper : MonoBehaviour {
 
-
+	[SerializeField]
+	private bool shooterAreDeactived = false;
     [SerializeField]
     private KeyCode shoot;
+
+	[SerializeField]
+	private GameObject laserBeam;
 
     [SerializeField]
     List<AbstractShooter> shotList;
@@ -18,13 +22,20 @@ public class GunWrapper : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKey(shoot))
-        {
-            foreach (AbstractShooter sh in shotList)
-            {
-                sh.Shoot();
-            }
-        }
+		if (Input.GetKey (shoot)) 
+		{
+			laserBeam.SetActive (true);
+
+			if (!shooterAreDeactived) 
+			{
+				foreach (AbstractShooter sh in shotList) 
+				{
+					sh.Shoot ();
+				}
+			}
+		} 
+		else
+			laserBeam.SetActive (false);
 
 	}
 }

@@ -14,6 +14,9 @@ public class FlyingUI : MonoBehaviour {
 	private Vector2 newPosition;
 
 	[SerializeField]
+	private ShipHealth shipHealth;
+
+	[SerializeField]
 	private FlyingLevelStatus flyingLevelStatus;
 
 	void Start()
@@ -33,6 +36,10 @@ public class FlyingUI : MonoBehaviour {
 		newPosition = new Vector2 (10 + (flyingLevelStatus.PercentOfDistance * 200), 15);
 		GUI.DrawTexture (new Rect (Vector2.Lerp(oldPosition, newPosition, 10 * Time.deltaTime), new Vector2(10, 10)), playerTexture);
 		oldPosition = newPosition;
+
+		textStyle = new GUIStyle ();
+		textStyle.normal.textColor = Color.black;
+		GUI.Label (new Rect (300, 10, 150, 50), "HEALTH: " + shipHealth.Health, textStyle);
 //		textStyle = new GUIStyle ();
 //		textStyle.normal.textColor = Color.black;
 //		textStyle.fontSize = 22;
