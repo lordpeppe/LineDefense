@@ -9,12 +9,17 @@ public class ProjectileBehaviour : MonoBehaviour
     [SerializeField]
     private float despawnTime;
 
+    [SerializeField]
+    private bool despawnOnHit;
+
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            gameObject.SetActive(false);
+            if(despawnOnHit)
+                gameObject.SetActive(false);
         }
     }
 

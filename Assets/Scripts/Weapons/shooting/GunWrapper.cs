@@ -24,8 +24,6 @@ public class GunWrapper : MonoBehaviour {
 
 		if (Input.GetKey (shoot)) 
 		{
-			laserBeam.SetActive (true);
-
 			if (!shooterAreDeactived) 
 			{
 				foreach (AbstractShooter sh in shotList) 
@@ -34,8 +32,7 @@ public class GunWrapper : MonoBehaviour {
 				}
 			}
 		} 
-		else
-			laserBeam.SetActive (false);
 
 	}
+
 }

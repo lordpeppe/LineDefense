@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        Debug.Log(currentHealth);
     }
 
     protected bool IsDestroyed()
