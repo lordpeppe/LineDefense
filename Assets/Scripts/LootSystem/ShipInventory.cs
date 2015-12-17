@@ -1,22 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class ShipInventory : MonoBehaviour {
 
+    [SerializeField]
+    GameObject ship;
 
-    enum ItemSlot {
+    
+    Dictionary<ItemSlot, Item> itemMap;
+
+    public enum ItemSlot {
         PROJECTILE, GUN, SHIELD, NONE
     }
 
     struct Item
     {
         public Item(string name, GameObject itemPrefab, ItemSlot type) { this.name = name; this.itemPrefab = itemPrefab; this.type = type; }
-        readonly string name;
+        public readonly string name;
         public readonly GameObject itemPrefab;
         public readonly ItemSlot type;
     }
 
-    Dictionary<ItemSlot, Item> itemMap;
 
 	// Use this for initialization
 	void Start () {
@@ -24,14 +29,13 @@ public class ShipInventory : MonoBehaviour {
         Item emptyItem = new Item("empty", new GameObject(), ItemSlot.NONE);
 
         itemMap = new Dictionary<ItemSlot, Item>();
-        itemMap.Add(ItemSlot.PROJECTILE, emptyItem);
-        itemMap.Add(ItemSlot.GUN, emptyItem);
-        itemMap.Add(ItemSlot.SHIELD, emptyItem);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+       
+        
 	}
 
     void SwitchItem(ItemSlot slot, Item newItem)
@@ -44,6 +48,8 @@ public class ShipInventory : MonoBehaviour {
         }
 
         itemMap[slot] = newItem;
+        Instantiate(newItem.itemPrefab, ship.transform.position, Quaternion.identity);
+
     }
 
 
